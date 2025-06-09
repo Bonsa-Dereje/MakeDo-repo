@@ -55,7 +55,16 @@ class mainDashboard {
         mainSubPanel.setLayout(new BoxLayout(mainSubPanel, BoxLayout.Y_AXIS));
         mainSubPanel.add(Box.createVerticalStrut(15));
 
-        // --- Hard Disk Panel ---
+        JPanel slit1 = new JPanel();
+        slit1.setLayout(new BoxLayout(slit1, BoxLayout.Y_AXIS));
+
+        JPanel slit2 = new JPanel();
+        slit2.setLayout(new BoxLayout(slit2, BoxLayout.Y_AXIS));
+
+        JPanel slit3 = new JPanel();
+        slit3.setLayout(new BoxLayout(slit3, BoxLayout.Y_AXIS));
+
+
         JPanel hrSubPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 2, 3));
         JPanel hddDash = new RoundedPanel(20);
         hddDash.setLayout(new BoxLayout(hddDash, BoxLayout.Y_AXIS));
@@ -85,19 +94,19 @@ class mainDashboard {
             hddDash.add(new JLabel("Drive: " + drive.name));
             hddDash.add(new JLabel("Health: " + drive.health + " / 100"));
             hddDash.add(new JLabel("Bad Sectors: " + drive.badSectors));
-
+/*
             if (!drive.issues.isEmpty()) {
                 for (String issue : drive.issues) {
                     String cleaned = issue.replaceAll("\\s*\\(.*?\\)", "").trim();
                     hddDash.add(new JLabel(cleaned));
                 }
             }
-
+ */
             if (!drive.partitions.isEmpty()) {
                 hddDash.add(new JLabel("Partitions:"));
                 for (diskCheck.PartitionInfo p : drive.partitions) {
-                    String partInfo = String.format(" - %s: %.2f GB used / %.2f GB total (%.2f GB free)",
-                            p.name, p.usedGB, p.totalGB, p.freeGB);
+                    String partInfo = String.format("%.2f GB total",
+                            p.totalGB);
                     hddDash.add(new JLabel(partInfo));
                 }
             }
@@ -109,8 +118,6 @@ class mainDashboard {
         }
 
 
-
-        // ---------- CPU Panel ----------
         JPanel cpuDash = new RoundedPanel(20);
         cpuDash.setLayout(new BoxLayout(cpuDash, BoxLayout.Y_AXIS));
         cpuDash.setBackground(Color.decode("#B0C4DE"));
@@ -180,7 +187,9 @@ class mainDashboard {
             ramDash.add(new JLabel("  Transfer Rate: " + m.transferRateMTps));
         }
 
-        // ---------- Battery Panel ----------
+        JPanel sideStack = new JPanel(new FlowLayout());
+
+
         JPanel batteryDash = new RoundedPanel(20);
         batteryDash.setLayout(new BoxLayout(batteryDash, BoxLayout.Y_AXIS));
         batteryDash.setBackground(Color.decode("#B0C4DE"));
@@ -214,7 +223,7 @@ class mainDashboard {
             batteryDash.add(new JLabel("No battery detected."));
         }
 
-        // ---------- Screen Panel ----------
+        
         JPanel screenDash = new RoundedPanel(20);
         screenDash.setLayout(new BoxLayout(screenDash, BoxLayout.Y_AXIS));
         screenDash.setBackground(Color.decode("#B0C4DE"));
@@ -251,7 +260,7 @@ class mainDashboard {
             }
         }
 
-        // ---------- OS Panel ----------
+        
         JPanel osDash = new RoundedPanel(20);
         osDash.setLayout(new BoxLayout(osDash, BoxLayout.Y_AXIS));
         osDash.setBackground(Color.decode("#B0C4DE"));
@@ -315,6 +324,8 @@ if (gpuInfoList.isEmpty()) {
     }
 }
 
+    
+
         JPanel prfDash = new RoundedPanel(20);
         prfDash.setLayout(new BoxLayout(prfDash, BoxLayout.Y_AXIS));
         prfDash.setBackground(Color.decode("#B0C4DE"));
@@ -345,9 +356,18 @@ if (gpuInfoList.isEmpty()) {
                 String statusText = device.isWorking ? "Working" : "Unknown Status";
                 prfDash.add(new JLabel(" - " + device.name + " [" + statusText + "]"));
             }
-    
+        slit1.add(hddDash);
 
-        // ---------- Add to main dashboard ----------
+        slit2.add(screenDash);
+            sideStack.add(screenDash);
+            sideStack.add(batteryDash);
+        slit2.add(sideStack);
+        slit2.add(gpuDash);
+
+        slit3.add(ramDash);
+        slit3.add(osDash);
+
+        /*
         mainDash.add(hddDash);
         mainDash.add(cpuDash);
         mainDash.add(ramDash);
@@ -356,6 +376,14 @@ if (gpuInfoList.isEmpty()) {
         mainDash.add(osDash);
         mainDash.add(gpuDash);
         mainDash.add(prfDash);
+         */
+
+         mainDash.add(slit1);
+         mainDash.add(slit2);
+         mainDash.add(slit3);
+         
+         
+         
 
         mainSubPanel.add(mainDash);
         mainDashboardWindow.add(mainSubPanel);

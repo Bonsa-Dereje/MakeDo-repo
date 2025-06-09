@@ -29,7 +29,7 @@ class signInPage{
         position.anchor = GridBagConstraints.CENTER;
 
 
-        ImageIcon signIN_img = new ImageIcon("G:\\Dev Softwares\\MakeDo\\assets\\user-light.png");
+        ImageIcon signIN_img = new ImageIcon("C:\\Users\\boni\\Desktop\\Files\\MakeDo\\assets\\user-light.png");
         Image scaledImage = signIN_img.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
         JLabel signIN_imgLabel = new JLabel(new ImageIcon(scaledImage));
         signInPanel.add(signIN_imgLabel);
@@ -99,6 +99,7 @@ class signInPage{
             }else if(result == JOptionPane.NO_OPTION){
                 showSignInPage();
             }
+            signInWindow.setVisible(false);
         });
 
         Color originalBg = UIManager.getColor("Button.background");
@@ -171,7 +172,7 @@ class userLogin{
 
         JLabel space = new JLabel(" ");
 
-        ImageIcon loginImg = new ImageIcon("G:\\Dev Softwares\\MakeDo\\assets\\login.png");
+        ImageIcon loginImg = new ImageIcon("C:\\Users\\boni\\Desktop\\Files\\MakeDo\\assets\\login.png");
         Image scaledImage = loginImg.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         JLabel signIN_imgLabel = new JLabel(new ImageIcon(scaledImage));
 
@@ -295,7 +296,7 @@ class newSignUp{
 
         JLabel space = new JLabel("  ");
 
-        ImageIcon loginImg = new ImageIcon("G:\\Dev Softwares\\MakeDo\\assets\\add-user.png");
+        ImageIcon loginImg = new ImageIcon("C:\\Users\\boni\\Desktop\\Files\\MakeDo\\assets\\add-user.png");
         Image scaledImage = loginImg.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         JLabel signIN_imgLabel = new JLabel(new ImageIcon(scaledImage));
 
